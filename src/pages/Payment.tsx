@@ -296,7 +296,7 @@ const Payment = () => {
 
       // Clear localStorage
       localStorage.removeItem("currentApplicationId");
-      localStorage.removeItem("zenkaLoanLimit");
+      localStorage.removeItem("talaLoanLimit");
       localStorage.removeItem("selectedLoanAmount");
       localStorage.removeItem("processingFee");
 

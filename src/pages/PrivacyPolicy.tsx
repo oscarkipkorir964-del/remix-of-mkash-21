@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
         <div className="prose prose-sm max-w-none space-y-6 text-foreground/90">
           <section>
             <h2 className="text-xl font-semibold text-foreground">1. Information We Collect</h2>
-            <p>When you use Zenka, we collect the following information:</p>
+            <p>When you use TALA FUNDS, we collect the following information:</p>
             <ul className="list-disc pl-6 space-y-1">
               <li><strong>Personal Information:</strong> Full name, phone number, email address, ID number, and employment details provided during loan application.</li>
               <li><strong>Financial Information:</strong> Income level, loan history, savings deposits, and M-Pesa transaction details.</li>
@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2 className="text-xl font-semibold text-foreground">8. Children's Privacy</h2>
-            <p>Zenka is not intended for users under 18 years of age. We do not knowingly collect information from children under 18.</p>
+            <p>TALA FUNDS is not intended for users under 18 years of age. We do not knowingly collect information from children under 18.</p>
           </section>
 
           <section>
@@ -91,7 +91,7 @@ const PrivacyPolicy = () => {
             <h2 className="text-xl font-semibold text-foreground">10. Contact Us</h2>
             <p>If you have questions about this privacy policy or your data, contact us:</p>
             <ul className="list-disc pl-6 space-y-1">
-              <li>Email: support@zenka.co.ke</li>
+              <li>Email: support@talafunds.co.ke</li>
               <li>In-app support chat</li>
             </ul>
           </section>

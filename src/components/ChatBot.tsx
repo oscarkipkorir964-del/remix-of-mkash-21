@@ -26,7 +26,7 @@ type SupportRequest = {
 export const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hi! I'm your Zenka assistant. How can I help you today?" }
+    { role: "assistant", content: "Hi! I'm your TALA FUNDS assistant. How can I help you today?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -44,14 +44,12 @@ export const ChatBot = () => {
     }
   }, [messages]);
 
-  // Load previous support messages and check for active conversation when opening chat
   useEffect(() => {
     if (isOpen) {
       loadActiveSupport();
     }
   }, [isOpen]);
 
-  // Subscribe to new messages when in support mode
   useEffect(() => {
     if (!currentRequestId || !isOpen) return;
 
@@ -84,7 +82,6 @@ export const ChatBot = () => {
     };
   }, [currentRequestId, isOpen]);
 
-  // Listen for admin typing
   useEffect(() => {
     if (!currentRequestId || !isOpen) return;
 
@@ -114,7 +111,6 @@ export const ChatBot = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      // Check for active (pending) support request
       const { data: activeRequest } = await supabase
         .from("support_requests")
         .select("*")
@@ -129,7 +125,6 @@ export const ChatBot = () => {
         setCurrentRequest(activeRequest);
         setInSupportMode(true);
 
-        // Load all messages for this conversation
         const { data: supportMsgs } = await supabase
           .from("support_messages")
           .select("*")
@@ -149,7 +144,6 @@ export const ChatBot = () => {
             ...loadedMessages
           ]);
         } else {
-          // Show the initial message
           setMessages([
             { role: "assistant", content: "You're connected to support. An admin will respond shortly." },
             { role: "user", content: activeRequest.message, isSupport: true, senderType: "user" }
@@ -190,7 +184,6 @@ export const ChatBot = () => {
       let streamDone = false;
       let assistantContent = "";
 
-      // Add empty assistant message
       setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
       while (!streamDone) {
@@ -244,7 +237,6 @@ export const ChatBot = () => {
     setInput("");
     
     if (inSupportMode && currentRequestId) {
-      // Send message to support conversation
       setMessages((prev) => [...prev, { role: "user", content: userMessage, isSupport: true, senderType: "user" }]);
       
       try {
@@ -262,7 +254,6 @@ export const ChatBot = () => {
         toast.error("Failed to send message");
       }
     } else {
-      // Regular AI chat
       setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
       setIsLoading(true);
       await streamChat(userMessage);
@@ -283,7 +274,6 @@ export const ChatBot = () => {
         return;
       }
 
-      // Create support request
       const { data: newRequest, error } = await supabase
         .from("support_requests")
         .insert({
@@ -298,7 +288,6 @@ export const ChatBot = () => {
       if (error) throw error;
 
       if (newRequest) {
-        // Add first message to support_messages table
         await supabase
           .from("support_messages")
           .insert({
@@ -311,7 +300,6 @@ export const ChatBot = () => {
         setCurrentRequest(newRequest);
         setInSupportMode(true);
 
-        // Switch to support mode
         setMessages([
           { role: "assistant", content: "You're now connected to support. An admin will respond shortly. You can continue chatting here until your issue is resolved." },
           { role: "user", content: supportMessage, isSupport: true, senderType: "user" }
@@ -343,7 +331,7 @@ export const ChatBot = () => {
       setCurrentRequestId(null);
       setCurrentRequest(null);
       setMessages([
-        { role: "assistant", content: "Hi! I'm your Zenka assistant. How can I help you today?" }
+        { role: "assistant", content: "Hi! I'm your TALA FUNDS assistant. How can I help you today?" }
       ]);
     } catch (error) {
       console.error("Error closing support:", error);
@@ -353,7 +341,6 @@ export const ChatBot = () => {
 
   return (
     <>
-      {/* Floating Chat Button */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
@@ -364,14 +351,13 @@ export const ChatBot = () => {
         </Button>
       )}
 
-      {/* Chat Window */}
       {isOpen && (
         <Card className="fixed inset-4 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-96 sm:h-[500px] h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] shadow-xl z-50 flex flex-col">
           <CardHeader className="flex flex-row items-center justify-between border-b pb-4">
             <div className="flex items-center gap-2">
               <CardTitle className="text-lg flex items-center gap-2">
                 <MessageCircle className="w-5 h-5" />
-                {inSupportMode ? "Support Chat" : "Zenka Assistant"}
+                {inSupportMode ? "Support Chat" : "TALA FUNDS Assistant"}
               </CardTitle>
               {inSupportMode && (
                 <Badge variant="secondary" className="text-xs">Live</Badge>

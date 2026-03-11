@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Loader2, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import zenkaLogo from "@/assets/zenka-logo.png";
+// Logo removed - using text brand
 import {
   InputOTP,
   InputOTPGroup,
@@ -141,11 +141,9 @@ const ResetPassword = () => {
     <div className="min-h-screen bg-gradient-soft flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-card">
         <CardHeader className="text-center space-y-4">
-          <img 
-            src={zenkaLogo} 
-            alt="Zenka" 
-            className="h-16 w-auto mx-auto"
-          />
+          <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto">
+            <span className="text-primary-foreground font-bold text-2xl font-display">T</span>
+          </div>
           <div>
             <CardTitle className="text-2xl">Reset Password</CardTitle>
             <CardDescription>

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 import { FileText, Loader2, ArrowLeft } from "lucide-react";
-import zenkaLogo from "@/assets/zenka-logo.png";
+// Logo removed - using text brand
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
@@ -194,7 +194,7 @@ const Application = () => {
 
         // Store application ID and loan limit in localStorage for next steps
         localStorage.setItem("currentApplicationId", application.id);
-        localStorage.setItem("zenkaLoanLimit", loanLimit.toString());
+        localStorage.setItem("talaLoanLimit", loanLimit.toString());
         
         setIsLoading(false);
         navigate("/loan-limit");
@@ -487,8 +487,8 @@ const Application = () => {
         <Dialog open={isLoading} onOpenChange={() => {}}>
           <DialogContent className="max-w-[85%] sm:max-w-sm rounded-3xl border-0 shadow-2xl bg-card [&>button]:hidden">
             <DialogHeader>
-              <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse overflow-hidden">
-                <img src={zenkaLogo} alt="Zenka" className="w-16 h-16 object-contain" />
+              <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <span className="text-primary font-bold text-3xl font-display">T</span>
               </div>
               <DialogTitle className="text-center text-2xl">
                 Calculating Your Loan Limit

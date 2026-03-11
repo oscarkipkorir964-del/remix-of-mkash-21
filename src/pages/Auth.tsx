@@ -8,7 +8,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { LogIn, UserPlus, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import zenkaLogo from "@/assets/zenka-logo.png";
 import DecorativeBackground from "@/components/DecorativeBackground";
 
 const Auth = () => {
@@ -58,7 +57,6 @@ const Auth = () => {
       return;
     }
 
-    // Validate phone number format (Kenyan format)
     const phoneRegex = /^(254|0)[17]\d{8}$/;
     if (!phoneRegex.test(formData.phoneNumber)) {
       toast({
@@ -70,7 +68,6 @@ const Auth = () => {
       return;
     }
 
-    // Validate phone number length
     if (formData.phoneNumber.length < 10 || formData.phoneNumber.length > 12) {
       toast({
         title: "Invalid Phone Number",
@@ -81,7 +78,6 @@ const Auth = () => {
       return;
     }
 
-    // Validate ID number (numeric only and proper length)
     if (!isLogin) {
       if (!/^\d+$/.test(formData.idNumber)) {
         toast({
@@ -115,8 +111,7 @@ const Auth = () => {
     }
 
     try {
-      // Use phone as email (phone@zenkaloans.com)
-      const email = `${formData.phoneNumber}@zenkaloans.com`;
+      const email = `${formData.phoneNumber}@talafunds.co.ke`;
       
       if (isLogin) {
         const { data: authData, error } = await supabase.auth.signInWithPassword({
@@ -126,7 +121,6 @@ const Auth = () => {
 
         if (error) throw error;
 
-        // Check if user has admin role
         const { data: roleData } = await supabase
           .from("user_roles")
           .select("role")
@@ -139,14 +133,12 @@ const Auth = () => {
           description: "Welcome back!",
         });
         
-        // Redirect to admin dashboard if user is admin, otherwise to user dashboard
         if (roleData) {
           navigate("/admin");
         } else {
           navigate("/dashboard");
         }
       } else {
-        // Direct signup
         const { error } = await supabase.auth.signUp({
           email,
           password: formData.password,
@@ -163,7 +155,7 @@ const Auth = () => {
 
         toast({
           title: "Account Created",
-          description: "Welcome to Zenka!",
+          description: "Welcome to TALA FUNDS!",
         });
         
         navigate("/dashboard");
@@ -185,14 +177,12 @@ const Auth = () => {
       <DecorativeBackground />
       <Card className="w-full max-w-md shadow-card relative z-10">
         <CardHeader className="text-center space-y-4">
-          <img 
-            src={zenkaLogo} 
-            alt="Zenka" 
-            className="h-16 w-auto mx-auto"
-          />
+          <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto">
+            <span className="text-primary-foreground font-bold text-2xl font-display">T</span>
+          </div>
           <div>
             <CardTitle className="text-2xl">
-              {isLogin ? "Welcome Back!" : "Join Zenka"}
+              {isLogin ? "Welcome Back!" : "Join TALA FUNDS"}
             </CardTitle>
             <CardDescription>
               {isLogin 

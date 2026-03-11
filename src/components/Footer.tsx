@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-center md:text-left">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Zenka. All rights reserved.
+              © {new Date().getFullYear()} TALA FUNDS. All rights reserved.
             </p>
           </div>
           
@@ -22,11 +22,11 @@ const Footer = () => {
             </Link>
             
             <a 
-              href="mailto:support@zenka.co.ke"
+              href="mailto:support@talafunds.co.ke"
               className="flex items-center gap-2 text-sm hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4" />
-              support@zenka.co.ke
+              support@talafunds.co.ke
             </a>
             
             <a 

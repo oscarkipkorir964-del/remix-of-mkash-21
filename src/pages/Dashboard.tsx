@@ -18,7 +18,25 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import zenkaLogo from "@/assets/zenka-logo.png";
+
+interface LoanApplication {
+  id: string;
+  user_id: string;
+  loan_limit: number;
+  loan_term: number;
+  purpose: string;
+  created_at: string;
+  whatsapp_number: string;
+}
+
+interface LoanDisbursement {
+  id: string;
+  loan_application_id: string;
+  loan_amount: number;
+  disbursed: boolean;
+  created_at: string;
+  loan_applications: LoanApplication;
+}
 
 interface SavingsDeposit {
   id: string;
@@ -259,7 +277,7 @@ const Dashboard = () => {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
-            <img src={zenkaLogo} alt="Zenka" className="h-12 w-12 object-contain" />
+            <span className="text-primary-foreground font-bold text-3xl font-display">T</span>
           </div>
           <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />
         </div>
@@ -276,7 +294,7 @@ const Dashboard = () => {
             <div className="flex items-center gap-2">
               <ThemeToggle />
             </div>
-            <span className="font-bold text-xl text-foreground">Zenka</span>
+            <span className="font-bold text-xl text-foreground font-display">TALA FUNDS</span>
             <NotificationsCenter />
           </div>
         </div>
@@ -285,31 +303,29 @@ const Dashboard = () => {
       <main className="max-w-lg mx-auto px-4 py-5 space-y-5">
         {/* Greeting */}
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold text-foreground">
+          <h1 className="text-2xl font-bold text-foreground font-display">
             Hello, {userName}!
           </h1>
-          <p className="text-muted-foreground text-sm">Welcome back to Zenka</p>
+          <p className="text-muted-foreground text-sm">Welcome back to TALA FUNDS</p>
         </div>
 
         {/* Quick Actions */}
         <div className="space-y-3">
-          <h2 className="text-lg font-bold text-foreground">Quick Actions</h2>
+          <h2 className="text-lg font-bold text-foreground font-display">Quick Actions</h2>
           <div className="grid grid-cols-2 gap-3">
-            {/* Repay Loan */}
             <Card 
               className="cursor-pointer hover:shadow-md active:scale-[0.98] transition-all bg-card border-0 shadow-sm"
               onClick={() => setShowRepayDialog(true)}
             >
               <CardContent className="p-4">
-                <div className="w-10 h-10 mb-3 rounded-xl bg-[hsl(217,91%,60%)]/10 flex items-center justify-center">
-                  <CreditCard className="w-5 h-5 text-[hsl(217,91%,60%)]" />
+                <div className="w-10 h-10 mb-3 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <CreditCard className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground">Repay Loan</h3>
                 <p className="text-xs text-muted-foreground mt-0.5">Clear your balance</p>
               </CardContent>
             </Card>
 
-            {/* History */}
             <Card 
               className="cursor-pointer hover:shadow-md active:scale-[0.98] transition-all bg-card border-0 shadow-sm"
               onClick={() => historyRef.current?.scrollIntoView({ behavior: 'smooth' })}
@@ -323,7 +339,6 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Withdraw */}
             <Card 
               className="cursor-pointer hover:shadow-md active:scale-[0.98] transition-all bg-card border-0 shadow-sm"
               onClick={() => setShowWithdrawDialog(true)}
@@ -337,14 +352,13 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Apply Now */}
             <Card 
               className="cursor-pointer hover:shadow-md active:scale-[0.98] transition-all bg-card border-0 shadow-sm"
               onClick={() => navigate("/application")}
             >
               <CardContent className="p-4">
-                <div className="w-10 h-10 mb-3 rounded-xl bg-[hsl(217,91%,60%)]/10 flex items-center justify-center">
-                  <ArrowUpRight className="w-5 h-5 text-[hsl(217,91%,60%)]" />
+                <div className="w-10 h-10 mb-3 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <ArrowUpRight className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground">Apply Now</h3>
                 <p className="text-xs text-muted-foreground mt-0.5">Get a new loan</p>
@@ -353,9 +367,9 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Savings Balance Card - Green Gradient */}
+        {/* Savings Balance Card */}
         <Card className="border-0 shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-br from-primary via-primary to-[hsl(174,65%,40%)] p-5 rounded-2xl">
+          <div className="bg-gradient-to-br from-primary via-primary to-primary-glow p-5 rounded-2xl">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
@@ -367,7 +381,7 @@ const Dashboard = () => {
                 onClick={() => {
                   localStorage.removeItem("selectedLoanAmount");
                   localStorage.removeItem("currentApplicationId");
-                  localStorage.removeItem("zenkaLoanLimit");
+                  localStorage.removeItem("talaLoanLimit");
                   navigate("/payment");
                 }}
                 size="sm"
@@ -384,27 +398,27 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        {/* Loan Limit Card - Only show limit after user has applied */}
+        {/* Loan Limit Card */}
         <Card className="bg-card border-0 shadow-sm">
           <CardContent className="p-5">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                 {loanApplications.length > 0 ? "Available Loan Limit" : "Get a Loan"}
               </span>
-              <div className="w-10 h-10 rounded-xl bg-[hsl(217,91%,60%)]/10 flex items-center justify-center">
-                <LayoutGrid className="w-5 h-5 text-[hsl(217,91%,60%)]" />
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <LayoutGrid className="w-5 h-5 text-primary" />
               </div>
             </div>
             {loanApplications.length > 0 ? (
               <>
                 <p className="text-4xl font-bold text-foreground mb-4">KSh {loanLimit.toLocaleString()}</p>
                 <div className="flex items-center gap-2 mb-4 p-3 bg-muted/50 rounded-xl">
-                  <CheckCircle className="w-5 h-5 text-[hsl(217,91%,60%)]" />
+                  <CheckCircle className="w-5 h-5 text-primary" />
                   <span className="text-sm text-muted-foreground">Your account is eligible for an instant loan</span>
                 </div>
                 <Button 
                   onClick={() => navigate("/loan-selection")}
-                  className="w-full h-12 bg-[hsl(217,91%,60%)] hover:bg-[hsl(217,91%,55%)] text-white rounded-xl shadow-md font-semibold"
+                  className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl shadow-md font-semibold"
                 >
                   Borrow Now
                 </Button>
@@ -415,7 +429,7 @@ const Dashboard = () => {
                 <p className="text-sm text-muted-foreground mb-4">Apply now to see how much you can borrow instantly</p>
                 <Button 
                   onClick={() => navigate("/application")}
-                  className="w-full h-12 bg-[hsl(217,91%,60%)] hover:bg-[hsl(217,91%,55%)] text-white rounded-xl shadow-md font-semibold"
+                  className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl shadow-md font-semibold"
                 >
                   Apply Now
                 </Button>
@@ -426,7 +440,7 @@ const Dashboard = () => {
 
         {/* Loan Status */}
         <div className="space-y-3">
-          <h2 className="text-lg font-bold text-foreground">Loan Status</h2>
+          <h2 className="text-lg font-bold text-foreground font-display">Loan Status</h2>
           <Card className="bg-card border-0 shadow-sm">
             <CardContent className="p-6 text-center">
               {activeDisbursements.length === 0 ? (
@@ -466,7 +480,7 @@ const Dashboard = () => {
 
         {/* Recent Activity */}
         <div ref={historyRef} className="space-y-3">
-          <h2 className="text-lg font-bold text-foreground">Recent Activity</h2>
+          <h2 className="text-lg font-bold text-foreground font-display">Recent Activity</h2>
           <Card className="bg-card border-0 shadow-sm">
             <CardContent className="p-4">
               {savingsDeposits.length === 0 && withdrawals.length === 0 ? (
@@ -491,12 +505,12 @@ const Dashboard = () => {
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                           item.type === 'deposit' 
                             ? 'bg-primary/15' 
-                            : 'bg-[hsl(25,80%,92%)]'
+                            : 'bg-secondary/15'
                         }`}>
                           {item.type === 'deposit' ? (
                             <ArrowUpRight className="w-5 h-5 text-primary" />
                           ) : (
-                            <ArrowDownRight className="w-5 h-5 text-[hsl(25,70%,50%)]" />
+                            <ArrowDownRight className="w-5 h-5 text-secondary" />
                           )}
                         </div>
                         <div>
@@ -510,7 +524,7 @@ const Dashboard = () => {
                       </div>
                       <div className="text-right">
                         <p className={`font-bold text-sm ${
-                          item.type === 'deposit' ? 'text-primary' : 'text-[hsl(25,70%,50%)]'
+                          item.type === 'deposit' ? 'text-primary' : 'text-secondary'
                         }`}>
                           {item.type === 'deposit' ? '+' : '-'}KSh {item.amount.toLocaleString()}
                         </p>
