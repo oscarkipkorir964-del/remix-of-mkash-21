@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Banknote, CreditCard, PiggyBank, FileText, ArrowRight, Info, Eye, EyeOff, Wallet, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import zenkaLogo from "@/assets/zenka-logo.png";
+// Logo removed - using text brand
 
 const MIN_LOAN_AMOUNT = 2000;
 const MAX_LOAN_AMOUNT = 30000;
