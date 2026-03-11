@@ -47,7 +47,7 @@ const LoanSelection = () => {
 
       if (error || !applications || applications.length === 0) {
         // No loan application found, redirect to application page
-        localStorage.removeItem("zenkaLoanLimit");
+        localStorage.removeItem("talaLoanLimit");
         navigate("/application");
         return;
       }
