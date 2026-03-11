@@ -194,7 +194,7 @@ const Application = () => {
 
         // Store application ID and loan limit in localStorage for next steps
         localStorage.setItem("currentApplicationId", application.id);
-        localStorage.setItem("zenkaLoanLimit", loanLimit.toString());
+        localStorage.setItem("talaLoanLimit", loanLimit.toString());
         
         setIsLoading(false);
         navigate("/loan-limit");
