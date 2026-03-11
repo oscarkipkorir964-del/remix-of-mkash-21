@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Loader2, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import zenkaLogo from "@/assets/zenka-logo.png";
+// Logo removed - using text brand
 import {
   InputOTP,
   InputOTPGroup,
