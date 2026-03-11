@@ -3,25 +3,22 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { X, Download, Smartphone } from "lucide-react";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
-import zenkaLogo from "@/assets/zenka-logo.png";
 
 const InstallPrompt = () => {
   const [showPrompt, setShowPrompt] = useState(false);
   const { isInstallable, isInstalled, installApp } = usePWAInstall();
 
   useEffect(() => {
-    // Check if user has already dismissed the prompt
     const dismissed = localStorage.getItem("installPromptDismissed");
     const dismissedTime = dismissed ? parseInt(dismissed) : 0;
     const dayInMs = 24 * 60 * 60 * 1000;
     
-    // Show prompt again after 1 day if dismissed
     const shouldShow = !dismissed || (Date.now() - dismissedTime > dayInMs);
     
     if (shouldShow && !isInstalled) {
       const timer = setTimeout(() => {
         setShowPrompt(true);
-      }, 5000); // Show after 5 seconds
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -39,7 +36,6 @@ const InstallPrompt = () => {
     }
   };
 
-  // Don't show if already installed
   if (isInstalled) return null;
 
   return (
@@ -53,19 +49,17 @@ const InstallPrompt = () => {
         </button>
         
         <DialogHeader className="text-center space-y-2">
-          <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto overflow-hidden">
-            <img src={zenkaLogo} alt="Zenka" className="w-full h-full object-cover" />
+          <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto">
+            <span className="text-primary-foreground font-bold text-xl font-display">T</span>
           </div>
-          <DialogTitle className="text-lg">Get Zenka App</DialogTitle>
+          <DialogTitle className="text-lg font-display">Get TALA FUNDS App</DialogTitle>
           <DialogDescription className="text-center text-xs">
             Install for quick access to loans & savings
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-3 mt-3">
-          {/* Store-style Install Buttons */}
           <div className="flex flex-col gap-2">
-            {/* Google Play Style */}
             <button 
               onClick={handleInstall}
               className="flex items-center gap-2 p-2 bg-muted/50 hover:bg-muted rounded-lg transition-colors cursor-pointer"
@@ -85,7 +79,6 @@ const InstallPrompt = () => {
               <Download className="w-4 h-4 text-muted-foreground" />
             </button>
 
-            {/* Apple App Store Style */}
             <button 
               onClick={handleInstall}
               className="flex items-center gap-2 p-2 bg-muted/50 hover:bg-muted rounded-lg transition-colors cursor-pointer"
@@ -103,7 +96,6 @@ const InstallPrompt = () => {
             </button>
           </div>
 
-          {/* Dismiss Button */}
           <Button 
             variant="ghost" 
             className="w-full text-muted-foreground h-8 text-xs"
