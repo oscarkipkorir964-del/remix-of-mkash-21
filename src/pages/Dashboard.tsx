@@ -306,7 +306,7 @@ const Dashboard = () => {
           <h1 className="text-2xl font-bold text-foreground font-display">
             Hello, {userName}!
           </h1>
-          <p className="text-muted-foreground text-sm">Welcome back to TALA FUNDS</p>
+          <p className="text-muted-foreground text-sm">Welcome back to M-Kash Loans</p>
         </div>
 
         {/* Quick Actions */}
