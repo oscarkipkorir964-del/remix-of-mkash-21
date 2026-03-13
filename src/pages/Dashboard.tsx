@@ -294,7 +294,7 @@ const Dashboard = () => {
             <div className="flex items-center gap-2">
               <ThemeToggle />
             </div>
-            <span className="font-bold text-xl text-foreground font-display">TALA FUNDS</span>
+            <span className="font-bold text-xl text-foreground font-display">M-Kash Loans</span>
             <NotificationsCenter />
           </div>
         </div>
