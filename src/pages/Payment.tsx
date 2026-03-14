@@ -49,13 +49,62 @@ const Payment = () => {
     fetchPhoneNumber();
   }, []);
 
-  // Real-time listener for deposit verification
+  // Poll + realtime listener for deposit verification
   useEffect(() => {
     if (!pendingReference) return;
 
-    console.log('Setting up real-time listener for reference:', pendingReference);
+    console.log('Setting up real-time listener + polling for reference:', pendingReference);
 
-    // Subscribe to all updates on savings_deposits table
+    let settled = false;
+
+    const handleVerified = async (amount: number) => {
+      if (settled) return;
+      settled = true;
+      setPaymentStatus('success');
+      await fetchSavingsBalance();
+      toast({
+        title: "Payment Confirmed!",
+        description: `KES ${amount.toLocaleString()} has been added to your savings.`,
+      });
+      setPendingReference(null);
+      setDepositAmount("");
+    };
+
+    const handleFailed = () => {
+      if (settled) return;
+      settled = true;
+      setPaymentStatus('failed');
+      toast({
+        title: "Payment Failed",
+        description: "The payment was not completed. Please try again.",
+        variant: "destructive",
+      });
+      setPendingReference(null);
+    };
+
+    // Polling fallback — check every 5 seconds
+    const pollInterval = setInterval(async () => {
+      if (settled) return;
+      try {
+        const { data } = await supabase
+          .from('savings_deposits')
+          .select('verified, amount')
+          .eq('transaction_code', pendingReference)
+          .maybeSingle();
+
+        if (data?.verified === true) {
+          console.log('Poll detected verified deposit:', data);
+          await handleVerified(data.amount);
+        } else if (data?.verified === false) {
+          console.log('Poll detected failed deposit:', data);
+          handleFailed();
+        }
+      } catch (err) {
+        console.error('Poll error:', err);
+      }
+    }, 5000);
+
+    // Realtime subscription as primary channel
     const channel = supabase
       .channel(`savings-deposit-${pendingReference}`)
       .on(
@@ -69,29 +118,12 @@ const Payment = () => {
           console.log('Deposit change received:', payload);
           const newRecord = payload.new as { verified: boolean | null; amount: number; transaction_code: string };
           
-          // Check if this update is for our pending reference
           if (newRecord.transaction_code !== pendingReference) return;
           
-          console.log('Matching deposit found:', newRecord);
-          
           if (newRecord.verified === true) {
-            setPaymentStatus('success');
-            await fetchSavingsBalance();
-            toast({
-              title: "Payment Confirmed!",
-              description: `KES ${newRecord.amount.toLocaleString()} has been added to your savings.`,
-            });
-            setPendingReference(null);
-            setDepositAmount("");
+            await handleVerified(newRecord.amount);
           } else if (newRecord.verified === false) {
-            // Only treat as failed if explicitly set to false (not null)
-            setPaymentStatus('failed');
-            toast({
-              title: "Payment Failed",
-              description: "The payment was not completed. Please try again.",
-              variant: "destructive",
-            });
-            setPendingReference(null);
+            handleFailed();
           }
         }
       )
@@ -101,18 +133,19 @@ const Payment = () => {
 
     // Timeout after 2 minutes
     const timeout = setTimeout(() => {
-      if (paymentStatus === 'waiting') {
-        setPaymentStatus('failed');
+      if (!settled) {
+        handleFailed();
         toast({
           title: "Payment Timeout",
           description: "We didn't receive confirmation. If you completed the payment, please contact support.",
           variant: "destructive",
         });
-        setPendingReference(null);
       }
     }, 120000);
 
     return () => {
+      settled = true;
+      clearInterval(pollInterval);
       supabase.removeChannel(channel);
       clearTimeout(timeout);
     };
