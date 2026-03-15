@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate, Link } from "react-router-dom";
 import { LogIn, UserPlus, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import mkashLogo from "@/assets/mkash-logo.png";
 import DecorativeBackground from "@/components/DecorativeBackground";
 

@@ -1,3 +1,4 @@
+import mkashLogo from "@/assets/mkash-logo.png";
 import { Button } from "@/components/ui/button";
 import { UserMenu } from "@/components/UserMenu";
 import { RefreshCw, Bell, Activity } from "lucide-react";
