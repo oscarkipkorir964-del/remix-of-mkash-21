@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { ChatBot } from "@/components/ChatBot";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NotificationsCenter } from "@/components/NotificationsCenter";
+import mkashLogo from "@/assets/mkash-logo.png";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
