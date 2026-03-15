@@ -177,9 +177,7 @@ const Auth = () => {
       <DecorativeBackground />
       <Card className="w-full max-w-md shadow-card relative z-10">
         <CardHeader className="text-center space-y-4">
-          <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto">
-            <span className="text-primary-foreground font-bold text-2xl font-display">M</span>
-          </div>
+          <img src={mkashLogo} alt="M-Kash Loans" className="w-16 h-16 object-contain mx-auto" />
           <div>
             <CardTitle className="text-2xl">
               {isLogin ? "Welcome Back!" : "Join M-Kash Loans"}

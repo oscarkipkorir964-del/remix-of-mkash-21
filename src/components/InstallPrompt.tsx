@@ -50,9 +50,7 @@ const InstallPrompt = () => {
         </button>
         
         <DialogHeader className="text-center space-y-2">
-          <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto">
-            <span className="text-primary-foreground font-bold text-xl font-display">M</span>
-          </div>
+          <img src={mkashLogo} alt="M-Kash Loans" className="w-14 h-14 object-contain mx-auto" />
           <DialogTitle className="text-lg font-display">Get M-Kash Loans App</DialogTitle>
           <DialogDescription className="text-center text-xs">
             Install for quick access to loans & savings

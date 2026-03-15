@@ -277,9 +277,7 @@ const Dashboard = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
-            <span className="text-primary-foreground font-bold text-3xl font-display">M</span>
-          </div>
+          <img src={mkashLogo} alt="M-Kash Loans" className="w-20 h-20 object-contain mx-auto mb-4" />
           <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />
         </div>
       </div>
