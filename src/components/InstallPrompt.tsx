@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { X, Download, Smartphone } from "lucide-react";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
+import mkashLogo from "@/assets/mkash-logo.png";
 
 const InstallPrompt = () => {
   const [showPrompt, setShowPrompt] = useState(false);
