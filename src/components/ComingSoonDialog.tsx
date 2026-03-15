@@ -1,3 +1,4 @@
+import mkashLogo from "@/assets/mkash-logo.png";
 import {
   Dialog,
   DialogContent,
