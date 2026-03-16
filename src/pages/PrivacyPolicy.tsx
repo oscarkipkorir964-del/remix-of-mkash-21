@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import mkashLogo from "@/assets/mkash-logo.png";
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate();
@@ -12,8 +13,11 @@ const PrivacyPolicy = () => {
           <ArrowLeft className="w-4 h-4 mr-2" /> Back
         </Button>
 
-        <h1 className="text-3xl font-bold text-foreground mb-2">Privacy Policy</h1>
-        <p className="text-muted-foreground mb-8">Last updated: February 13, 2026</p>
+        <div className="mb-8 text-center">
+          <img src={mkashLogo} alt="M-Kash Loans" className="w-16 h-16 object-contain mx-auto mb-3" />
+          <h1 className="text-3xl font-bold text-foreground mb-2">Privacy Policy</h1>
+          <p className="text-muted-foreground">Last updated: February 13, 2026</p>
+        </div>
 
         <div className="prose prose-sm max-w-none space-y-6 text-foreground/90">
           <section>

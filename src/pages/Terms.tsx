@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { FileCheck, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import mkashLogo from "@/assets/mkash-logo.png";
 
 const Terms = () => {
   const navigate = useNavigate();
@@ -11,9 +12,7 @@ const Terms = () => {
       <div className="container max-w-3xl mx-auto">
         <Card className="shadow-card">
           <CardHeader className="text-center">
-            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <FileCheck className="w-8 h-8 text-primary" />
-            </div>
+            <img src={mkashLogo} alt="M-Kash Loans" className="w-16 h-16 object-contain mx-auto mb-4" />
             <CardTitle className="text-2xl">Terms & Conditions</CardTitle>
             <CardDescription>
               M-Kash Loans Service Agreement
@@ -24,6 +23,7 @@ const Terms = () => {
               
               {/* Header */}
               <div className="text-center border-b border-border pb-4">
+                <img src={mkashLogo} alt="M-Kash Loans" className="w-12 h-12 object-contain mx-auto mb-3" />
                 <h3 className="font-bold text-lg">M-Kash Loans</h3>
                 <p className="text-muted-foreground">P.O BOX 30834-0100, NAIROBI, KENYA</p>
               </div>

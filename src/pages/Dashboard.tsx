@@ -289,11 +289,14 @@ const Dashboard = () => {
       {/* Header */}
       <header className="bg-card sticky top-0 z-50 shadow-sm">
         <div className="max-w-lg mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <ThemeToggle />
             </div>
-            <span className="font-bold text-xl text-foreground font-display">M-Kash Loans</span>
+            <div className="flex items-center gap-2 min-w-0">
+              <img src={mkashLogo} alt="M-Kash Loans" className="w-8 h-8 object-contain flex-shrink-0" />
+              <span className="font-bold text-xl text-foreground font-display truncate">M-Kash Loans</span>
+            </div>
             <NotificationsCenter />
           </div>
         </div>
