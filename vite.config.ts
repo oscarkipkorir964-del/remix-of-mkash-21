@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => ({
       registerType: "autoUpdate",
       includeAssets: ["favicon.png", "apple-touch-icon.png"],
       manifest: {
-        name: "Zenka",
-        short_name: "Zenka",
+        name: "Zenkash",
+        short_name: "Zenkash",
         description: "Growth & Savings - Fast, Friendly, and Reliable Loans for Everyone",
         theme_color: "#14b8a6",
         background_color: "#ffffff",

@@ -1,7 +1,7 @@
 import { Download, Smartphone, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
-import mkashLogo from "@/assets/mkash-logo.png";
+import mkashLogo from "@/assets/zenkash-logo.png";
 
 const AppDownloadSection = () => {
   const { isInstallable, isInstalled, installApp } = usePWAInstall();
@@ -43,7 +43,7 @@ const AppDownloadSection = () => {
               <Download className="w-5 h-5 mr-2" />
               <div className="text-left">
                 <div className="text-xs opacity-80">Install now</div>
-                <div className="font-bold">M-Kash Loans</div>
+                <div className="font-bold">Zenkash</div>
               </div>
             </Button>
           ) : (
@@ -52,7 +52,7 @@ const AppDownloadSection = () => {
                 onClick={handleInstallClick}
                 className="bg-foreground text-background hover:bg-foreground/90 rounded-xl px-5 py-3 h-auto"
               >
-                <img src={mkashLogo} alt="M-Kash Loans" className="w-6 h-6 mr-2 object-contain" />
+                <img src={mkashLogo} alt="Zenkash" className="w-6 h-6 mr-2 object-contain" />
                 <div className="text-left">
                   <div className="text-xs opacity-80">Download app</div>
                   <div className="font-bold">for Android</div>

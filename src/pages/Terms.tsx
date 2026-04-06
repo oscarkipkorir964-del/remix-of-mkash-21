@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import mkashLogo from "@/assets/mkash-logo.png";
+import mkashLogo from "@/assets/zenkash-logo.png";
 
 const Terms = () => {
   const navigate = useNavigate();
@@ -12,10 +12,10 @@ const Terms = () => {
       <div className="container max-w-3xl mx-auto">
         <Card className="shadow-card">
           <CardHeader className="text-center">
-            <img src={mkashLogo} alt="M-Kash Loans" className="w-16 h-16 object-contain mx-auto mb-4" />
+            <img src={mkashLogo} alt="Zenkash" className="w-16 h-16 object-contain mx-auto mb-4" />
             <CardTitle className="text-2xl">Terms & Conditions</CardTitle>
             <CardDescription>
-              M-Kash Loans Service Agreement
+              Zenkash Service Agreement
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -23,15 +23,15 @@ const Terms = () => {
               
               {/* Header */}
               <div className="text-center border-b border-border pb-4">
-                <img src={mkashLogo} alt="M-Kash Loans" className="w-12 h-12 object-contain mx-auto mb-3" />
-                <h3 className="font-bold text-lg">M-Kash Loans</h3>
+                <img src={mkashLogo} alt="Zenkash" className="w-12 h-12 object-contain mx-auto mb-3" />
+                <h3 className="font-bold text-lg">Zenkash</h3>
                 <p className="text-muted-foreground">P.O BOX 30834-0100, NAIROBI, KENYA</p>
               </div>
 
               <div className="space-y-2">
-                <h3 className="font-bold text-lg">TERMS AND CONDITIONS OF LOANS – M-Kash Loans Kenya</h3>
+                <h3 className="font-bold text-lg">TERMS AND CONDITIONS OF LOANS – Zenkash Kenya</h3>
                 <p className="text-muted-foreground">
-                  Terms and Conditions for the Opening and Use of a Loan Account with M-Kash Loans, Kenya.
+                  Terms and Conditions for the Opening and Use of a Loan Account with Zenkash, Kenya.
                 </p>
               </div>
 
@@ -39,10 +39,10 @@ const Terms = () => {
               <div className="space-y-3">
                 <h4 className="font-semibold text-primary">WHEREAS</h4>
                 <p className="text-muted-foreground">
-                  This Agreement is a financial service and an end-user licence agreement between you ("End-user" or "you" or "Borrower") and M-Kash Loans, a company incorporated under the laws of the Republic of Kenya (hereinafter called "M-Kash Loans" or "Lender" or "us" or "we").
+                  This Agreement is a financial service and an end-user licence agreement between you ("End-user" or "you" or "Borrower") and Zenkash, a company incorporated under the laws of the Republic of Kenya (hereinafter called "Zenkash" or "Lender" or "us" or "we").
                 </p>
                 <p className="text-muted-foreground">
-                  This Agreement (together with our Privacy Policy) sets out the complete terms and conditions (the "Terms and Conditions") which shall be applicable to the Account opened by you with M-Kash Loans.
+                  This Agreement (together with our Privacy Policy) sets out the complete terms and conditions (the "Terms and Conditions") which shall be applicable to the Account opened by you with Zenkash.
                 </p>
                 <p className="text-muted-foreground">
                   These Terms and Conditions and any amendments or variations thereto take effect on their date of publication.
@@ -59,23 +59,23 @@ const Terms = () => {
                   
                   <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
                     <li><strong>Agreement</strong> means this Agreement;</li>
-                    <li><strong>Account</strong> means your loan account with M-Kash Loans;</li>
+                    <li><strong>Account</strong> means your loan account with Zenkash;</li>
                     <li><strong>Business Day</strong> means a day other than a Saturday, Sunday or national or public holiday in the Republic of Kenya;</li>
                     <li><strong>Credentials</strong> means your personal credentials used to access the App and operate your Account;</li>
                     <li><strong>Credit Reference Bureau</strong> means a credit reference bureau duly licensed under the Banking Act pursuant to the Banking (Credit Reference Bureau) Regulations, 2013;</li>
                     <li><strong>E-Money</strong> means the electronic monetary value depicted in your Mobile Money Account representing an equal amount of cash;</li>
                     <li><strong>Equipment</strong> includes your mobile phone handset, SIM Card and/or other equipment which when used together enables you to access the Network;</li>
                     <li><strong>Force Majeure</strong> means events beyond reasonable control including acts of God, war, strikes, embargoes or government orders;</li>
-                    <li><strong>Loan</strong> means the principal amount of the loan made by M-Kash Loans to you under this Agreement;</li>
+                    <li><strong>Loan</strong> means the principal amount of the loan made by Zenkash to you under this Agreement;</li>
                     <li><strong>Mobile Money Account</strong> means your M-Pesa or other mobile money store of value;</li>
                     <li><strong>Mobile Money Provider</strong> means a Mobile Network Operator authorized by the Central Bank of Kenya to offer Mobile Money Services;</li>
                     <li><strong>Network</strong> means a mobile cellular network operated by a Mobile Network Operator;</li>
-                    <li><strong>Privacy Policy</strong> means the M-Kash Loans privacy policy;</li>
-                    <li><strong>Request</strong> means a request or instruction received by M-Kash Loans from you through the System;</li>
-                    <li><strong>Services</strong> shall include any form of financial services that M-Kash Loans may offer you;</li>
+                    <li><strong>Privacy Policy</strong> means the Zenkash privacy policy;</li>
+                    <li><strong>Request</strong> means a request or instruction received by Zenkash from you through the System;</li>
+                    <li><strong>Services</strong> shall include any form of financial services that Zenkash may offer you;</li>
                     <li><strong>SIM Card</strong> means the subscriber identity module used with your mobile phone;</li>
                     <li><strong>SMS</strong> means a short message service text message;</li>
-                    <li><strong>System</strong> means M-Kash Loans's electronic communications software;</li>
+                    <li><strong>System</strong> means Zenkash's electronic communications software;</li>
                     <li><strong>Transaction Fees</strong> includes any fees and charges payable for the use of the Services.</li>
                   </ul>
 
@@ -93,10 +93,10 @@ const Terms = () => {
               <div className="space-y-3">
                 <h4 className="font-semibold text-primary">2. ACCEPTANCE OF TERMS AND CONDITIONS</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
-                  <p>2.1 You must carefully read and understand these Terms and Conditions before downloading the App or opening an account with M-Kash Loans.</p>
+                  <p>2.1 You must carefully read and understand these Terms and Conditions before downloading the App or opening an account with Zenkash.</p>
                   <p>2.2 After downloading the App, you will be deemed to accept the Terms and Conditions upon clicking the "Accept" option. If you do not agree, please click "Decline" - you will not be able to access the Services.</p>
                   <p>2.3 By downloading the App and opening an Account, you agree to comply with and be bound by these Terms and Conditions.</p>
-                  <p>2.4 These Terms and Conditions may be amended by M-Kash Loans from time to time. Continued use constitutes your agreement to any amendments.</p>
+                  <p>2.4 These Terms and Conditions may be amended by Zenkash from time to time. Continued use constitutes your agreement to any amendments.</p>
                   <p>2.5 Updates to the App may be issued from time to time. You may need to download the latest version to continue using the Services.</p>
                   <p>2.6 By using the App, you consent to us collecting and using technical information about your Equipment for improving our products and services.</p>
                 </div>
@@ -142,20 +142,20 @@ const Terms = () => {
                   <p className="mt-3"><strong>5.2 Use of the Services</strong></p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>The Services can only be utilized by persons over the age of 18;</li>
-                    <li>M-Kash Loans reserves the right to verify the authenticity of your Mobile Money Account;</li>
-                    <li>M-Kash Loans reserves the right to decline your application at its sole discretion;</li>
-                    <li>M-Kash Loans determines your maximum loan eligibility based on established assessment procedures;</li>
+                    <li>Zenkash reserves the right to verify the authenticity of your Mobile Money Account;</li>
+                    <li>Zenkash reserves the right to decline your application at its sole discretion;</li>
+                    <li>Zenkash determines your maximum loan eligibility based on established assessment procedures;</li>
                     <li>Loan terms including interest rate will be displayed on the App.</li>
                   </ul>
 
                   <p className="mt-3"><strong>5.3 Personal Information</strong></p>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>You authorize M-Kash Loans to verify information provided against Mobile Money Provider records;</li>
+                    <li>You authorize Zenkash to verify information provided against Mobile Money Provider records;</li>
                     <li>Information verified includes phone number, name, date of birth, ID/Passport Number;</li>
-                    <li>You authorize M-Kash Loans to access data from your Equipment and SMS messages;</li>
-                    <li>You consent to M-Kash Loans obtaining your Personal Information from Mobile Money Providers;</li>
-                    <li>You authorize M-Kash Loans to access and query your credit information from licensed CRBs;</li>
-                    <li>M-Kash Loans may request further information at any time. Failure to provide may result in declined applications.</li>
+                    <li>You authorize Zenkash to access data from your Equipment and SMS messages;</li>
+                    <li>You consent to Zenkash obtaining your Personal Information from Mobile Money Providers;</li>
+                    <li>You authorize Zenkash to access and query your credit information from licensed CRBs;</li>
+                    <li>Zenkash may request further information at any time. Failure to provide may result in declined applications.</li>
                   </ul>
                 </div>
               </div>
@@ -164,14 +164,14 @@ const Terms = () => {
               <div className="space-y-3">
                 <h4 className="font-semibold text-primary">6. REQUESTS MADE BY THE BORROWER</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
-                  <p>6.1 You irrevocably authorize M-Kash Loans to act on all Requests received from you through the System.</p>
-                  <p>6.2 M-Kash Loans reserves the right to reject any Request at its discretion.</p>
-                  <p>6.3 M-Kash Loans may act upon incomplete or ambiguous Requests if it believes it can correct the information.</p>
-                  <p>6.4 M-Kash Loans shall be deemed to have acted properly even if the Request was sent in error or fraudulently.</p>
-                  <p>6.5 M-Kash Loans may decline to act on any Request pending further enquiry.</p>
-                  <p>6.6 You agree to indemnify M-Kash Loans against all claims arising from acting on your Requests.</p>
-                  <p>6.7 M-Kash Loans shall not be liable for any unauthorized activity on your Account.</p>
-                  <p>6.8 M-Kash Loans is authorized to comply with court orders or competent authority requirements.</p>
+                  <p>6.1 You irrevocably authorize Zenkash to act on all Requests received from you through the System.</p>
+                  <p>6.2 Zenkash reserves the right to reject any Request at its discretion.</p>
+                  <p>6.3 Zenkash may act upon incomplete or ambiguous Requests if it believes it can correct the information.</p>
+                  <p>6.4 Zenkash shall be deemed to have acted properly even if the Request was sent in error or fraudulently.</p>
+                  <p>6.5 Zenkash may decline to act on any Request pending further enquiry.</p>
+                  <p>6.6 You agree to indemnify Zenkash against all claims arising from acting on your Requests.</p>
+                  <p>6.7 Zenkash shall not be liable for any unauthorized activity on your Account.</p>
+                  <p>6.8 Zenkash is authorized to comply with court orders or competent authority requirements.</p>
                 </div>
               </div>
 
@@ -180,10 +180,10 @@ const Terms = () => {
                 <h4 className="font-semibold text-primary">7. SAVINGS, INTEREST AND FEES</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
                   <p>7.1 A minimum savings balance of KES 500 is required before loan disbursement. Savings are withdrawable after your first loan has been repaid.</p>
-                  <p>7.2 The interest payable shall be displayed on the App. M-Kash Loans may charge Transaction Fees which are subject to change.</p>
+                  <p>7.2 The interest payable shall be displayed on the App. Zenkash may charge Transaction Fees which are subject to change.</p>
                   <p>7.3 All payments shall be made in full without any set off or counter claim.</p>
                   <p>7.4 If you fail to make payments at the due date, late payment charges will apply.</p>
-                  <p>7.5 M-Kash Loans may approve loan extension requests subject to payment of accrued interest.</p>
+                  <p>7.5 Zenkash may approve loan extension requests subject to payment of accrued interest.</p>
                   
                   <p className="mt-3"><strong>7.6 Important Loan Information</strong></p>
                   <ul className="list-disc pl-6 space-y-1">
@@ -197,7 +197,7 @@ const Terms = () => {
                   <p className="mt-3"><strong>7.7 Customer Complaints</strong></p>
                   <p>You may lodge complaints through:</p>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>Email: support@mkashloans.co.ke</li>
+                    <li>Email: support@zenkash.co.ke</li>
                     <li>In-app support chat</li>
                   </ul>
                   <p>We shall acknowledge receipt within 48 hours and endeavor to resolve within 7 working days.</p>
@@ -210,8 +210,8 @@ const Terms = () => {
                 <div className="space-y-2 pl-4 text-muted-foreground">
                   <p>8.1 A statement and activity report will be made available on Request via email or the App.</p>
                   <p>8.2 The statement on the App shall provide details of your recent transactions.</p>
-                  <p>8.3 You must check your statement carefully and notify M-Kash Loans of any discrepancies.</p>
-                  <p>8.4 M-Kash Loans reserves the right to rectify discrepancies without prior notice.</p>
+                  <p>8.3 You must check your statement carefully and notify Zenkash of any discrepancies.</p>
+                  <p>8.4 Zenkash reserves the right to rectify discrepancies without prior notice.</p>
                   <p>8.5 You will be notified of all transactions by SMS.</p>
                 </div>
               </div>
@@ -221,7 +221,7 @@ const Terms = () => {
                 <h4 className="font-semibold text-primary">9. TAXES</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
                   <p>9.1 All payments are calculated without regard to taxes. If taxes are payable, you must pay an additional amount.</p>
-                  <p>9.2 You consent to M-Kash Loans withholding amounts if required by any tax authority.</p>
+                  <p>9.2 You consent to Zenkash withholding amounts if required by any tax authority.</p>
                 </div>
               </div>
 
@@ -231,11 +231,11 @@ const Terms = () => {
                 <div className="space-y-2 pl-4 text-muted-foreground">
                   <p>10.1 You shall maintain your Equipment in safe and efficient operating order.</p>
                   <p>10.2 You shall be responsible for any errors caused by malfunction of your Equipment.</p>
-                  <p>10.3 You shall follow all instructions and procedures provided by M-Kash Loans.</p>
+                  <p>10.3 You shall follow all instructions and procedures provided by Zenkash.</p>
                   <p>10.4 You shall be responsible for keeping your Credentials secret and secure.</p>
                   <p>10.5 You shall take all reasonable precautions to detect unauthorized use of the System.</p>
-                  <p>10.6 You shall follow the security procedures notified by M-Kash Loans.</p>
-                  <p>10.7 You shall not operate the Services in any manner prejudicial to M-Kash Loans.</p>
+                  <p>10.6 You shall follow the security procedures notified by Zenkash.</p>
+                  <p>10.7 You shall not operate the Services in any manner prejudicial to Zenkash.</p>
                 </div>
               </div>
 
@@ -248,7 +248,7 @@ const Terms = () => {
                     <li>Fail to pay any sum payable for 90 consecutive days;</li>
                     <li>Are declared bankrupt.</li>
                   </ul>
-                  <p>11.2 After an Event of Default, M-Kash Loans may:</p>
+                  <p>11.2 After an Event of Default, Zenkash may:</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Terminate this Agreement;</li>
                     <li>Declare all amounts immediately due and payable;</li>
@@ -261,8 +261,8 @@ const Terms = () => {
               <div className="space-y-3">
                 <h4 className="font-semibold text-primary">12. VARIATION AND TERMINATION</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
-                  <p>12.1 M-Kash Loans may terminate its relationship with you and close your Account at any time.</p>
-                  <p>12.2 M-Kash Loans may suspend or close your Account if:</p>
+                  <p>12.1 Zenkash may terminate its relationship with you and close your Account at any time.</p>
+                  <p>12.2 Zenkash may suspend or close your Account if:</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>You use the Account for unauthorized purposes or fraud;</li>
                     <li>Your agreement with a Mobile Network Operator is terminated;</li>
@@ -270,7 +270,7 @@ const Terms = () => {
                     <li>You breach these Terms and Conditions;</li>
                     <li>Technical problems or safety reasons require it;</li>
                     <li>Your Account becomes inactive or dormant;</li>
-                    <li>M-Kash Loans decides to suspend Services for commercial reasons.</li>
+                    <li>Zenkash decides to suspend Services for commercial reasons.</li>
                   </ul>
                   <p>12.3 If your Account has a credit balance from overpayment, you may request payment of such balance.</p>
                   <p>12.4 Termination shall not affect any accrued rights and liabilities.</p>
@@ -281,10 +281,10 @@ const Terms = () => {
               <div className="space-y-3">
                 <h4 className="font-semibold text-primary">13. EXCLUSION OF LIABILITY</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
-                  <p>13.1 M-Kash Loans shall not be responsible for any loss due to failure of your Equipment, Force Majeure, or circumstances beyond our control.</p>
+                  <p>13.1 Zenkash shall not be responsible for any loss due to failure of your Equipment, Force Majeure, or circumstances beyond our control.</p>
                   <p>13.2 You acknowledge that the App has not been developed to meet your individual requirements.</p>
                   <p>13.3 We only supply the App for domestic and private use. We have no liability for loss of profit or business.</p>
-                  <p>13.4 M-Kash Loans will not be liable for losses resulting from:</p>
+                  <p>13.4 Zenkash will not be liable for losses resulting from:</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Defects from you altering the App;</li>
                     <li>Using the App in breach of this Agreement;</li>
@@ -294,7 +294,7 @@ const Terms = () => {
                     <li>Fraudulent or illegal use of the Services;</li>
                     <li>Your failure to comply with these Terms.</li>
                   </ul>
-                  <p>13.5 Under no circumstances shall M-Kash Loans be liable for any loss of profit or indirect/consequential loss.</p>
+                  <p>13.5 Under no circumstances shall Zenkash be liable for any loss of profit or indirect/consequential loss.</p>
                 </div>
               </div>
 
@@ -302,7 +302,7 @@ const Terms = () => {
               <div className="space-y-3">
                 <h4 className="font-semibold text-primary">14. INDEMNITY</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
-                  <p>14.1 You undertake to indemnify M-Kash Loans against any loss, charge, damage, expense or claim which M-Kash Loans suffers from acting on your instructions.</p>
+                  <p>14.1 You undertake to indemnify Zenkash against any loss, charge, damage, expense or claim which Zenkash suffers from acting on your instructions.</p>
                   <p>14.2 The indemnity covers:</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>All claims arising from acting on any Request or system failure;</li>
@@ -318,7 +318,7 @@ const Terms = () => {
               <div className="space-y-3">
                 <h4 className="font-semibold text-primary">15. COMMUNICATION BETWEEN US</h4>
                 <div className="space-y-2 pl-4 text-muted-foreground">
-                  <p>15.1 You can contact us by email at support@mkashloans.co.ke.</p>
+                  <p>15.1 You can contact us by email at support@zenkash.co.ke.</p>
                   <p>15.2 We will contact you by email or SMS to the number you provided.</p>
                   <p>15.3 We may contact your emergency contact if you are unavailable.</p>
                 </div>
@@ -332,7 +332,7 @@ const Terms = () => {
                   <p>No failure to exercise any right shall operate as a waiver thereof.</p>
                   
                   <p className="mt-2"><strong>16.2 No Waiver</strong></p>
-                  <p>No failure by M-Kash Loans to exercise any right shall operate as a waiver of such right.</p>
+                  <p>No failure by Zenkash to exercise any right shall operate as a waiver of such right.</p>
                   
                   <p className="mt-2"><strong>16.3 Effect of Invalidity</strong></p>
                   <p>If any provision is found invalid, it shall not affect other provisions which remain in full force.</p>
@@ -387,7 +387,7 @@ const Terms = () => {
               <div className="mt-6 p-4 bg-primary/10 rounded-lg">
                 <p className="text-sm text-muted-foreground">
                   <strong>Contact Us:</strong><br />
-                  Email: support@mkashloans.co.ke<br />
+                  Email: support@zenkash.co.ke<br />
                   P.O Box 30834-0100, Nairobi, Kenya
                 </p>
               </div>

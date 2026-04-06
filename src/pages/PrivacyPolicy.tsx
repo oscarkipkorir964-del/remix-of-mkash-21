@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import mkashLogo from "@/assets/mkash-logo.png";
+import mkashLogo from "@/assets/zenkash-logo.png";
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
         </Button>
 
         <div className="mb-8 text-center">
-          <img src={mkashLogo} alt="M-Kash Loans" className="w-16 h-16 object-contain mx-auto mb-3" />
+          <img src={mkashLogo} alt="Zenkash" className="w-16 h-16 object-contain mx-auto mb-3" />
           <h1 className="text-3xl font-bold text-foreground mb-2">Privacy Policy</h1>
           <p className="text-muted-foreground">Last updated: February 13, 2026</p>
         </div>
@@ -22,7 +22,7 @@ const PrivacyPolicy = () => {
         <div className="prose prose-sm max-w-none space-y-6 text-foreground/90">
           <section>
             <h2 className="text-xl font-semibold text-foreground">1. Information We Collect</h2>
-            <p>When you use M-Kash Loans, we collect the following information:</p>
+            <p>When you use Zenkash, we collect the following information:</p>
             <ul className="list-disc pl-6 space-y-1">
               <li><strong>Personal Information:</strong> Full name, phone number, email address, ID number, and employment details provided during loan application.</li>
               <li><strong>Financial Information:</strong> Income level, loan history, savings deposits, and M-Pesa transaction details.</li>
@@ -83,7 +83,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2 className="text-xl font-semibold text-foreground">8. Children's Privacy</h2>
-            <p>M-Kash Loans is not intended for users under 18 years of age. We do not knowingly collect information from children under 18.</p>
+            <p>Zenkash is not intended for users under 18 years of age. We do not knowingly collect information from children under 18.</p>
           </section>
 
           <section>
@@ -95,7 +95,7 @@ const PrivacyPolicy = () => {
             <h2 className="text-xl font-semibold text-foreground">10. Contact Us</h2>
             <p>If you have questions about this privacy policy or your data, contact us:</p>
             <ul className="list-disc pl-6 space-y-1">
-              <li>Email: support@mkashloans.co.ke</li>
+              <li>Email: support@zenkash.co.ke</li>
               <li>In-app support chat</li>
             </ul>
           </section>

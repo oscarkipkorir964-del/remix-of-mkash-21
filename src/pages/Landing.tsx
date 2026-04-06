@@ -9,14 +9,14 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import mkashLogo from "@/assets/mkash-logo.png";
+import mkashLogo from "@/assets/zenkash-logo.png";
 
 const testimonials = [
   {
     name: "Kevin Kipyegon",
     location: "Nairobi",
     rating: 5,
-    text: "I got my loan in just 5 minutes! M-Kash Loans saved me when I needed emergency funds for my business.",
+    text: "I got my loan in just 5 minutes! Zenkash saved me when I needed emergency funds for my business.",
     amount: "KSh 8,500"
   },
   {
@@ -37,21 +37,21 @@ const testimonials = [
     name: "Faith Cherono",
     location: "Eldoret",
     rating: 5,
-    text: "Simple process, no paperwork. I recommend M-Kash Loans to all my friends and family.",
+    text: "Simple process, no paperwork. I recommend Zenkash to all my friends and family.",
     amount: "KSh 10,000"
   },
   {
     name: "Dennis Mutua",
     location: "Machakos",
     rating: 5,
-    text: "I've used many loan apps but M-Kash Loans is the best. Quick disbursement directly to M-Pesa!",
+    text: "I've used many loan apps but Zenkash is the best. Quick disbursement directly to M-Pesa!",
     amount: "KSh 14,500"
   },
   {
     name: "Mary Njeri",
     location: "Thika",
     rating: 5,
-    text: "Lifesaver! Got funds for my daughter's school fees within minutes. Thank you M-Kash Loans!",
+    text: "Lifesaver! Got funds for my daughter's school fees within minutes. Thank you Zenkash!",
     amount: "KSh 9,000"
   },
   {
@@ -72,7 +72,7 @@ const testimonials = [
     name: "James Mwangi",
     location: "Nyeri",
     rating: 5,
-    text: "M-Kash Loans has helped me grow my small business. The loan limits keep increasing!",
+    text: "Zenkash has helped me grow my small business. The loan limits keep increasing!",
     amount: "KSh 15,000"
   },
   {
@@ -93,14 +93,14 @@ const testimonials = [
     name: "Caroline Muthoni",
     location: "Kiambu",
     rating: 5,
-    text: "I was skeptical at first but M-Kash Loans proved me wrong. Genuine and reliable!",
+    text: "I was skeptical at first but Zenkash proved me wrong. Genuine and reliable!",
     amount: "KSh 8,000"
   },
   {
     name: "Michael Ouma",
     location: "Homa Bay",
     rating: 5,
-    text: "Emergency funds when I needed them most. M-Kash Loans is a blessing!",
+    text: "Emergency funds when I needed them most. Zenkash is a blessing!",
     amount: "KSh 10,500"
   },
   {
@@ -114,7 +114,7 @@ const testimonials = [
     name: "David Kimani",
     location: "Nairobi",
     rating: 5,
-    text: "Best rates in the market! I've compared with others and M-Kash Loans wins.",
+    text: "Best rates in the market! I've compared with others and Zenkash wins.",
     amount: "KSh 20,000"
   }
 ];
@@ -128,8 +128,8 @@ const Landing = () => {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2">
-          <img src={mkashLogo} alt="M-Kash Loans" className="w-10 h-10 object-contain" />
-          <span className="font-bold text-xl text-foreground font-display">M-Kash Loans</span>
+          <img src={mkashLogo} alt="Zenkash" className="w-10 h-10 object-contain" />
+          <span className="font-bold text-xl text-foreground font-display">Zenkash</span>
         </div>
         <ThemeToggle />
       </header>

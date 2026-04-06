@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { X, Download, Smartphone } from "lucide-react";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
-import mkashLogo from "@/assets/mkash-logo.png";
+import mkashLogo from "@/assets/zenkash-logo.png";
 
 const InstallPrompt = () => {
   const [showPrompt, setShowPrompt] = useState(false);
@@ -50,8 +50,8 @@ const InstallPrompt = () => {
         </button>
         
         <DialogHeader className="text-center space-y-2">
-          <img src={mkashLogo} alt="M-Kash Loans" className="w-14 h-14 object-contain mx-auto" />
-          <DialogTitle className="text-lg font-display">Get M-Kash Loans App</DialogTitle>
+          <img src={mkashLogo} alt="Zenkash" className="w-14 h-14 object-contain mx-auto" />
+          <DialogTitle className="text-lg font-display">Get Zenkash App</DialogTitle>
           <DialogDescription className="text-center text-xs">
             Install for quick access to loans & savings
           </DialogDescription>
