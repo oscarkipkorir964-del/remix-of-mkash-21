@@ -55,8 +55,10 @@ const LoanLimit = () => {
     return (
       <div className="min-h-screen bg-gradient-soft flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
+          <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-soft shadow-soft">
+            <span className="text-3xl font-bold text-white font-display">Z</span>
+          </div>
+          <p className="text-muted-foreground">Evaluating your loan limit...</p>
         </div>
       </div>
     );
