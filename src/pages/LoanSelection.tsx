@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Banknote, CreditCard, PiggyBank, FileText, ArrowRight, Info, Eye, EyeOff, Wallet, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import mkashLogo from "@/assets/mkash-logo.png";
+import zenkashLogo from "@/assets/zenkash-logo.png";
 
 const MIN_LOAN_AMOUNT = 2000;
 const MAX_LOAN_AMOUNT = 30000;
@@ -129,7 +129,7 @@ const LoanSelection = () => {
             >
               <ArrowLeft className="w-5 h-5" />
             </Button>
-            <img src={mkashLogo} alt="M-Kash Loans" className="w-12 h-12 object-contain" />
+            <img src={zenkashLogo} alt="Zenkash" className="w-12 h-12 object-contain" />
             <div className="text-white">
               <p className="text-sm opacity-80">Welcome,</p>
               <p className="font-bold">User</p>

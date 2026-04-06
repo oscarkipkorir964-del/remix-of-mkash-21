@@ -26,7 +26,7 @@ type SupportRequest = {
 export const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hi! I'm your M-Kash Loans assistant. How can I help you today?" }
+    { role: "assistant", content: "Hi! I'm your Zenkash assistant. How can I help you today?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -331,7 +331,7 @@ export const ChatBot = () => {
       setCurrentRequestId(null);
       setCurrentRequest(null);
       setMessages([
-        { role: "assistant", content: "Hi! I'm your M-Kash Loans assistant. How can I help you today?" }
+        { role: "assistant", content: "Hi! I'm your Zenkash assistant. How can I help you today?" }
       ]);
     } catch (error) {
       console.error("Error closing support:", error);
@@ -357,7 +357,7 @@ export const ChatBot = () => {
             <div className="flex items-center gap-2">
               <CardTitle className="text-lg flex items-center gap-2">
                 <MessageCircle className="w-5 h-5" />
-                {inSupportMode ? "Support Chat" : "M-Kash Assistant"}
+                {inSupportMode ? "Support Chat" : "Zenkash Assistant"}
               </CardTitle>
               {inSupportMode && (
                 <Badge variant="secondary" className="text-xs">Live</Badge>

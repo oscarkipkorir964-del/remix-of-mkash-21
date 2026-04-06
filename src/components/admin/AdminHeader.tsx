@@ -1,4 +1,4 @@
-import mkashLogo from "@/assets/mkash-logo.png";
+import zenkashLogo from "@/assets/zenkash-logo.png";
 import { Button } from "@/components/ui/button";
 import { UserMenu } from "@/components/UserMenu";
 import { RefreshCw, Bell, Activity } from "lucide-react";
@@ -20,7 +20,7 @@ export const AdminHeader = ({ user, onRefresh, pendingCount }: AdminHeaderProps)
   return (
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-3 min-w-0 flex-1">
-        <img src={mkashLogo} alt="M-Kash Loans" className="w-10 h-10 object-contain flex-shrink-0" />
+        <img src={zenkashLogo} alt="Zenkash" className="w-10 h-10 object-contain flex-shrink-0" />
         <div className="min-w-0">
           <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
             Super Admin

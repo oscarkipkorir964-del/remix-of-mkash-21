@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2, ArrowLeft, Edit, Save, User, Phone, Hash } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import mkashLogo from "@/assets/mkash-logo.png";
+import zenkashLogo from "@/assets/zenkash-logo.png";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Profile = () => {
             <Button variant="outline" size="icon" onClick={() => navigate("/dashboard")}>
               <ArrowLeft className="w-4 h-4" />
             </Button>
-            <img src={mkashLogo} alt="M-Kash Loans" className="h-10 sm:h-12 w-10 sm:w-12 object-contain" />
+            <img src={zenkashLogo} alt="Zenkash" className="h-10 sm:h-12 w-10 sm:w-12 object-contain" />
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">My Profile</h1>
           </div>
           <ThemeToggle />
