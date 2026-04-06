@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { ChatBot } from "@/components/ChatBot";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NotificationsCenter } from "@/components/NotificationsCenter";
-import mkashLogo from "@/assets/zenkash-logo.png";
+import zenkashLogo from "@/assets/zenkash-logo.png";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -277,7 +277,7 @@ const Dashboard = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <img src={mkashLogo} alt="Zenkash" className="w-20 h-20 object-contain mx-auto mb-4" />
+          <img src={zenkashLogo} alt="Zenkash" className="w-20 h-20 object-contain mx-auto mb-4" />
           <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />
         </div>
       </div>
@@ -294,7 +294,7 @@ const Dashboard = () => {
               <ThemeToggle />
             </div>
             <div className="flex items-center gap-2 min-w-0">
-              <img src={mkashLogo} alt="Zenkash" className="w-8 h-8 object-contain flex-shrink-0" />
+              <img src={zenkashLogo} alt="Zenkash" className="w-8 h-8 object-contain flex-shrink-0" />
               <span className="font-bold text-xl text-foreground font-display truncate">Zenkash</span>
             </div>
             <NotificationsCenter />

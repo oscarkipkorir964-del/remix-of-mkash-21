@@ -8,7 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { LogIn, UserPlus, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import mkashLogo from "@/assets/zenkash-logo.png";
+import zenkashLogo from "@/assets/zenkash-logo.png";
 import DecorativeBackground from "@/components/DecorativeBackground";
 
 const Auth = () => {
@@ -178,7 +178,7 @@ const Auth = () => {
       <DecorativeBackground />
       <Card className="w-full max-w-md shadow-card relative z-10">
         <CardHeader className="text-center space-y-4">
-          <img src={mkashLogo} alt="Zenkash" className="w-16 h-16 object-contain mx-auto" />
+          <img src={zenkashLogo} alt="Zenkash" className="w-16 h-16 object-contain mx-auto" />
           <div>
             <CardTitle className="text-2xl">
               {isLogin ? "Welcome Back!" : "Join Zenkash"}

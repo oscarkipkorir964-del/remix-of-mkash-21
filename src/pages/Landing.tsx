@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import mkashLogo from "@/assets/zenkash-logo.png";
+import zenkashLogo from "@/assets/zenkash-logo.png";
 
 const testimonials = [
   {
@@ -128,7 +128,7 @@ const Landing = () => {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2">
-          <img src={mkashLogo} alt="Zenkash" className="w-10 h-10 object-contain" />
+          <img src={zenkashLogo} alt="Zenkash" className="w-10 h-10 object-contain" />
           <span className="font-bold text-xl text-foreground font-display">Zenkash</span>
         </div>
         <ThemeToggle />

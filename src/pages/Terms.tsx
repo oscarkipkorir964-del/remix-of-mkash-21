@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import mkashLogo from "@/assets/zenkash-logo.png";
+import zenkashLogo from "@/assets/zenkash-logo.png";
 
 const Terms = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Terms = () => {
       <div className="container max-w-3xl mx-auto">
         <Card className="shadow-card">
           <CardHeader className="text-center">
-            <img src={mkashLogo} alt="Zenkash" className="w-16 h-16 object-contain mx-auto mb-4" />
+            <img src={zenkashLogo} alt="Zenkash" className="w-16 h-16 object-contain mx-auto mb-4" />
             <CardTitle className="text-2xl">Terms & Conditions</CardTitle>
             <CardDescription>
               Zenkash Service Agreement
@@ -23,7 +23,7 @@ const Terms = () => {
               
               {/* Header */}
               <div className="text-center border-b border-border pb-4">
-                <img src={mkashLogo} alt="Zenkash" className="w-12 h-12 object-contain mx-auto mb-3" />
+                <img src={zenkashLogo} alt="Zenkash" className="w-12 h-12 object-contain mx-auto mb-3" />
                 <h3 className="font-bold text-lg">Zenkash</h3>
                 <p className="text-muted-foreground">P.O BOX 30834-0100, NAIROBI, KENYA</p>
               </div>
