@@ -92,7 +92,26 @@ const Dashboard = () => {
 
     const depositsChannel = supabase
       .channel('dashboard-deposits')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'savings_deposits' }, () => {
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'savings_deposits' }, (payload) => {
+        const newRecord = payload.new as any;
+        const oldRecord = payload.old as any;
+        // Show toast when verified status changes
+        if (oldRecord.verified !== newRecord.verified) {
+          if (newRecord.verified === true) {
+            toast.success(`Deposit of KES ${newRecord.amount?.toLocaleString()} verified successfully! 🎉`, {
+              description: "Your savings balance has been updated.",
+              duration: 8000,
+            });
+          } else if (newRecord.verified === false && newRecord.mpesa_message?.includes("failed")) {
+            toast.error(`Deposit of KES ${newRecord.amount?.toLocaleString()} failed`, {
+              description: newRecord.mpesa_message?.replace(/\n\n\[REJECTED:.+?\]/, "") || "Payment was not completed.",
+              duration: 8000,
+            });
+          }
+        }
+        fetchData();
+      })
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'savings_deposits' }, () => {
         fetchData();
       })
       .subscribe();
