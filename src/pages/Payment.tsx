@@ -35,7 +35,7 @@ const Payment = () => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>('idle');
   const [pendingReference, setPendingReference] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { toast } = useToast();
+  
 
   // Check if this is a loan disbursement flow or just savings deposit
   const isLoanFlow = loanAmount !== null && loanAmount > 0;
