@@ -235,30 +235,19 @@ const Payment = () => {
       setPendingReference(data.reference);
       setPaymentStatus('waiting');
 
-      toast({
-        title: "Check Your Phone",
-        description: data.displayText || "Enter your M-Pesa PIN when prompted to complete the payment",
-      });
+      toast.info("Check Your Phone", { description: data.displayText || "Enter your M-Pesa PIN when prompted to complete the payment", duration: 10000 });
 
     } catch (error) {
       console.error("Payment error:", error);
       setPaymentStatus('failed');
-      toast({
-        title: "Payment Failed",
-        description: error instanceof Error ? error.message : "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
+      toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     }
   };
 
   const handleProceedWithLoan = async () => {
     const requiredSavings = loanAmount ? calculateRequiredSavings(loanAmount) : MIN_DEPOSIT_AMOUNT;
     if (savingsBalance === null || savingsBalance < requiredSavings) {
-      toast({
-        title: "Insufficient Savings",
-        description: `You need at least KES ${requiredSavings.toLocaleString()} in savings to proceed with a loan of KES ${loanAmount?.toLocaleString()}`,
-        variant: "destructive",
-      });
+      toast.error(`You need at least KES ${requiredSavings.toLocaleString()} in savings to proceed with a loan of KES ${loanAmount?.toLocaleString()}`);
       return;
     }
 
@@ -267,11 +256,7 @@ const Payment = () => {
       const applicationId = localStorage.getItem("currentApplicationId");
       
       if (!user || !applicationId) {
-        toast({
-          title: "Error",
-          description: "Session expired. Please start over.",
-          variant: "destructive",
-        });
+        toast.error("Session expired. Please start over.");
         navigate("/application");
         return;
       }
@@ -285,11 +270,7 @@ const Payment = () => {
 
       if (updateError) {
         console.error("Update error:", updateError);
-        toast({
-          title: "Error",
-          description: "Failed to process loan. Please try again.",
-          variant: "destructive",
-        });
+        toast.error("Failed to process loan. Please try again.");
         return;
       }
 
@@ -314,10 +295,7 @@ const Payment = () => {
       localStorage.removeItem("selectedLoanAmount");
       localStorage.removeItem("processingFee");
 
-      toast({
-        title: "Loan Approved!",
-        description: "Your loan is being disbursed to your M-Pesa number.",
-      });
+      toast.success("Loan Approved! Your loan is being disbursed to your M-Pesa number.");
 
       setTimeout(() => {
         navigate("/dashboard");
@@ -325,11 +303,7 @@ const Payment = () => {
 
     } catch (error) {
       console.error("Error:", error);
-      toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
