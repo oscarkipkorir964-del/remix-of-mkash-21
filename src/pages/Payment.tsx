@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Wallet, CheckCircle, Loader2, ArrowLeft, DollarSign, Sparkles, Phone, XCircle, Clock } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 
@@ -35,7 +35,7 @@ const Payment = () => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>('idle');
   const [pendingReference, setPendingReference] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { toast } = useToast();
+  
 
   // Check if this is a loan disbursement flow or just savings deposit
   const isLoanFlow = loanAmount !== null && loanAmount > 0;
@@ -62,10 +62,7 @@ const Payment = () => {
       settled = true;
       setPaymentStatus('success');
       await fetchSavingsBalance();
-      toast({
-        title: "Payment Confirmed!",
-        description: `KES ${amount.toLocaleString()} has been added to your savings.`,
-      });
+      toast.success(`Payment Confirmed! KES ${amount.toLocaleString()} has been added to your savings. 🎉`, { duration: 8000 });
       setPendingReference(null);
       setDepositAmount("");
     };
@@ -74,11 +71,7 @@ const Payment = () => {
       if (settled) return;
       settled = true;
       setPaymentStatus('failed');
-      toast({
-        title: "Payment Failed",
-        description: "The payment was not completed. Please try again.",
-        variant: "destructive",
-      });
+      toast.error("Payment Failed — The payment was not completed. Please try again.", { duration: 8000 });
       setPendingReference(null);
     };
 
@@ -135,11 +128,7 @@ const Payment = () => {
     const timeout = setTimeout(() => {
       if (!settled) {
         handleFailed();
-        toast({
-          title: "Payment Timeout",
-          description: "We didn't receive confirmation. If you completed the payment, please contact support.",
-          variant: "destructive",
-        });
+        toast.error("Payment Timeout — We didn't receive confirmation. If you completed the payment, please contact support.", { duration: 10000 });
       }
     }, 120000);
 
@@ -149,7 +138,7 @@ const Payment = () => {
       supabase.removeChannel(channel);
       clearTimeout(timeout);
     };
-  }, [pendingReference, paymentStatus, toast]);
+  }, [pendingReference, paymentStatus]);
 
   const fetchPhoneNumber = async () => {
     try {
@@ -205,20 +194,12 @@ const Payment = () => {
     const amount = parseInt(depositAmount);
     
     if (!phoneNumber.trim()) {
-      toast({
-        title: "Phone Required",
-        description: "Please enter your M-Pesa phone number",
-        variant: "destructive",
-      });
+      toast.error("Please enter your M-Pesa phone number");
       return;
     }
 
     if (!amount || amount < 100) {
-      toast({
-        title: "Invalid Amount",
-        description: "Please enter at least KES 100",
-        variant: "destructive",
-      });
+      toast.error("Please enter at least KES 100");
       return;
     }
 
@@ -254,30 +235,19 @@ const Payment = () => {
       setPendingReference(data.reference);
       setPaymentStatus('waiting');
 
-      toast({
-        title: "Check Your Phone",
-        description: data.displayText || "Enter your M-Pesa PIN when prompted to complete the payment",
-      });
+      toast.info("Check Your Phone", { description: data.displayText || "Enter your M-Pesa PIN when prompted to complete the payment", duration: 10000 });
 
     } catch (error) {
       console.error("Payment error:", error);
       setPaymentStatus('failed');
-      toast({
-        title: "Payment Failed",
-        description: error instanceof Error ? error.message : "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
+      toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     }
   };
 
   const handleProceedWithLoan = async () => {
     const requiredSavings = loanAmount ? calculateRequiredSavings(loanAmount) : MIN_DEPOSIT_AMOUNT;
     if (savingsBalance === null || savingsBalance < requiredSavings) {
-      toast({
-        title: "Insufficient Savings",
-        description: `You need at least KES ${requiredSavings.toLocaleString()} in savings to proceed with a loan of KES ${loanAmount?.toLocaleString()}`,
-        variant: "destructive",
-      });
+      toast.error(`You need at least KES ${requiredSavings.toLocaleString()} in savings to proceed with a loan of KES ${loanAmount?.toLocaleString()}`);
       return;
     }
 
@@ -286,11 +256,7 @@ const Payment = () => {
       const applicationId = localStorage.getItem("currentApplicationId");
       
       if (!user || !applicationId) {
-        toast({
-          title: "Error",
-          description: "Session expired. Please start over.",
-          variant: "destructive",
-        });
+        toast.error("Session expired. Please start over.");
         navigate("/application");
         return;
       }
@@ -304,11 +270,7 @@ const Payment = () => {
 
       if (updateError) {
         console.error("Update error:", updateError);
-        toast({
-          title: "Error",
-          description: "Failed to process loan. Please try again.",
-          variant: "destructive",
-        });
+        toast.error("Failed to process loan. Please try again.");
         return;
       }
 
@@ -333,10 +295,7 @@ const Payment = () => {
       localStorage.removeItem("selectedLoanAmount");
       localStorage.removeItem("processingFee");
 
-      toast({
-        title: "Loan Approved!",
-        description: "Your loan is being disbursed to your M-Pesa number.",
-      });
+      toast.success("Loan Approved! Your loan is being disbursed to your M-Pesa number.");
 
       setTimeout(() => {
         navigate("/dashboard");
@@ -344,11 +303,7 @@ const Payment = () => {
 
     } catch (error) {
       console.error("Error:", error);
-      toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
