@@ -62,10 +62,7 @@ const Payment = () => {
       settled = true;
       setPaymentStatus('success');
       await fetchSavingsBalance();
-      toast({
-        title: "Payment Confirmed!",
-        description: `KES ${amount.toLocaleString()} has been added to your savings.`,
-      });
+      toast.success(`Payment Confirmed! KES ${amount.toLocaleString()} has been added to your savings. 🎉`, { duration: 8000 });
       setPendingReference(null);
       setDepositAmount("");
     };
@@ -74,11 +71,7 @@ const Payment = () => {
       if (settled) return;
       settled = true;
       setPaymentStatus('failed');
-      toast({
-        title: "Payment Failed",
-        description: "The payment was not completed. Please try again.",
-        variant: "destructive",
-      });
+      toast.error("Payment Failed — The payment was not completed. Please try again.", { duration: 8000 });
       setPendingReference(null);
     };
 
@@ -135,11 +128,7 @@ const Payment = () => {
     const timeout = setTimeout(() => {
       if (!settled) {
         handleFailed();
-        toast({
-          title: "Payment Timeout",
-          description: "We didn't receive confirmation. If you completed the payment, please contact support.",
-          variant: "destructive",
-        });
+        toast.error("Payment Timeout — We didn't receive confirmation. If you completed the payment, please contact support.", { duration: 10000 });
       }
     }, 120000);
 
@@ -149,7 +138,7 @@ const Payment = () => {
       supabase.removeChannel(channel);
       clearTimeout(timeout);
     };
-  }, [pendingReference, paymentStatus, toast]);
+  }, [pendingReference, paymentStatus]);
 
   const fetchPhoneNumber = async () => {
     try {
@@ -205,19 +194,12 @@ const Payment = () => {
     const amount = parseInt(depositAmount);
     
     if (!phoneNumber.trim()) {
-      toast({
-        title: "Phone Required",
-        description: "Please enter your M-Pesa phone number",
-        variant: "destructive",
-      });
+      toast.error("Please enter your M-Pesa phone number");
       return;
     }
 
     if (!amount || amount < 100) {
-      toast({
-        title: "Invalid Amount",
-        description: "Please enter at least KES 100",
-        variant: "destructive",
+      toast.error("Please enter at least KES 100");
       });
       return;
     }
