@@ -200,7 +200,6 @@ const Payment = () => {
 
     if (!amount || amount < 100) {
       toast.error("Please enter at least KES 100");
-      });
       return;
     }
 
