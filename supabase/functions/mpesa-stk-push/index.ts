@@ -7,101 +7,80 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const { phoneNumber, amount, applicationId, depositType } = await req.json();
+    console.log('Paywave STK Push request:', { phoneNumber, amount, applicationId, depositType });
 
-    console.log('Lipwa STK Push request received:', { phoneNumber, amount, applicationId, depositType });
-
-    // Validate input
     if (!phoneNumber || !amount) {
       throw new Error('Missing required fields: phoneNumber or amount');
     }
 
-    // Format phone number for Lipwa (must be in format +254XXXXXXXXX)
-    let formattedPhone = phoneNumber.replace(/\D/g, ''); // Remove non-digits
-    if (formattedPhone.startsWith('0')) {
-      formattedPhone = '+254' + formattedPhone.substring(1);
-    } else if (formattedPhone.startsWith('254')) {
-      formattedPhone = '+' + formattedPhone;
-    } else if (!formattedPhone.startsWith('+254')) {
-      formattedPhone = '+254' + formattedPhone;
+    // Format phone for Paywave (accepts 07XX or 2547XX)
+    let formattedPhone = String(phoneNumber).replace(/\D/g, '');
+    if (formattedPhone.startsWith('254')) {
+      // already in 254 format
+    } else if (formattedPhone.startsWith('0')) {
+      formattedPhone = '254' + formattedPhone.substring(1);
+    } else if (formattedPhone.length === 9) {
+      formattedPhone = '254' + formattedPhone;
     }
 
-    console.log('Formatted phone:', formattedPhone);
+    const apiKey = (Deno.env.get('PAYWAVE_API_KEY') ?? '').trim();
+    const email = (Deno.env.get('PAYWAVE_EMAIL') ?? '').trim();
+    const accountNumber = (Deno.env.get('PAYWAVE_ACCOUNT_NUMBER') ?? '').trim();
 
-    // Get Lipwa credentials
-    const lipwaApiKey = (Deno.env.get('LIPWA_API_KEY') ?? '').trim();
-    const lipwaChannelId = (Deno.env.get('LIPWA_CHANNEL_ID') ?? '').trim();
-
-    console.log('Lipwa channel id:', { value: lipwaChannelId, length: lipwaChannelId.length });
-
-    if (!lipwaApiKey || !lipwaChannelId) {
-      throw new Error('Lipwa credentials not configured');
+    if (!apiKey || !email) {
+      throw new Error('Paywave credentials not configured');
     }
 
-    // Generate unique reference
-    const reference = depositType === 'savings' 
+    // Unique reference (prefix lets the callback route correctly)
+    const reference = depositType === 'savings'
       ? `savings_${Date.now()}_${Math.random().toString(36).substring(7)}`
       : `loan_${applicationId}_${Date.now()}`;
 
-    // Get the Supabase URL for callback
-    const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
-    const callbackUrl = `${supabaseUrl}/functions/v1/lipwa-callback`;
-
-    // Lipwa API payload
-    const lipwaPayload = {
-      amount: Math.floor(amount),
-      callback_url: callbackUrl,
-      channel_id: lipwaChannelId,
-      phone_number: formattedPhone,
-      api_ref: reference,
+    const payload: Record<string, string> = {
+      api_key: apiKey,
+      email,
+      amount: String(Math.floor(amount)),
+      msisdn: formattedPhone,
+      reference,
     };
+    if (accountNumber) payload.account_number = accountNumber;
 
-    console.log('Lipwa payload:', { ...lipwaPayload, api_ref: reference });
+    console.log('Paywave payload:', { ...payload, api_key: '***' });
 
-    // Send STK push request to Lipwa
-    const lipwaResponse = await fetch(
-      'https://pay.lipwa.app/api/payments',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${lipwaApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(lipwaPayload),
-      }
-    );
+    const pwResp = await fetch('https://paywavexpress.co.ke/v1/stkpush', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
 
-    const lipwaResult = await lipwaResponse.json();
-    console.log('Lipwa response:', lipwaResult);
+    const pwResult = await pwResp.json();
+    console.log('Paywave response:', pwResult);
 
-    if (!lipwaResponse.ok) {
-      throw new Error(lipwaResult.message || lipwaResult.error || 'Failed to initiate payment');
+    if (!pwResp.ok || pwResult.ResponseCode !== '0') {
+      throw new Error(pwResult.errorMessage || pwResult.message || 'Failed to initiate payment');
     }
 
-    // Store the reference for tracking
+    const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
     const supabase = createClient(
       supabaseUrl,
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get user ID from authorization header
     const authHeader = req.headers.get('Authorization');
-    let userId = null;
-    
+    let userId: string | null = null;
     if (authHeader) {
       const token = authHeader.replace('Bearer ', '');
       const { data: { user } } = await supabase.auth.getUser(token);
-      userId = user?.id;
+      userId = user?.id ?? null;
     }
 
     if (depositType === 'savings' && userId) {
-      // Create savings deposit record
       await supabase.from('savings_deposits').insert({
         user_id: userId,
         amount: Math.floor(amount),
@@ -110,7 +89,6 @@ serve(async (req) => {
         verified: false,
       });
     } else if (applicationId) {
-      // Create loan disbursement record
       await supabase.from('loan_disbursements').insert({
         application_id: applicationId,
         loan_amount: amount,
@@ -124,26 +102,19 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'STK Push sent successfully. Check your phone for the M-Pesa prompt.',
-        reference: reference,
+        message: pwResult.message || 'STK Push sent. Check your phone for the M-Pesa prompt.',
+        reference,
+        transaction_request_id: pwResult.transaction_request_id,
         displayText: 'Please enter your M-Pesa PIN when prompted',
       }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error in Lipwa STK Push:', error);
+    console.error('Error in Paywave STK Push:', error);
     const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
     return new Response(
-      JSON.stringify({
-        success: false,
-        error: errorMessage,
-      }),
-      {
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
+      JSON.stringify({ success: false, error: errorMessage }),
+      { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
