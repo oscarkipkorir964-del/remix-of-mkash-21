@@ -7,51 +7,47 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const payload = await req.json();
-    console.log('Lipwa callback received:', JSON.stringify(payload, null, 2));
+    console.log('Paywave callback received:', JSON.stringify(payload, null, 2));
 
-    // Lipwa callback structure
-    const { 
-      api_ref,
-      checkout_id,
-      transaction_id,
-      status,
-      amount,
-      phone_number,
-      mpesa_code,
-      result_desc,
-      payment_date
+    const {
+      ResponseCode,
+      ResponseDescription,
+      TransactionID,
+      TransactionAmount,
+      TransactionReceipt,
+      TransactionDate,
+      TransactionReference,
+      Msisdn,
     } = payload;
 
-    console.log('Processing callback:', { api_ref, status, amount, mpesa_code });
-
-    // Initialize Supabase client
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Lipwa sends "payment.success" for successful payments
-    const isSuccess = status === 'payment.success' || status === 'success' || status === 'Success' || status === 'COMPLETED';
-    const reference = api_ref;
+    const isSuccess = Number(ResponseCode) === 0;
+    const reference = TransactionReference as string | undefined;
 
-    if (reference?.startsWith('savings_')) {
-      // Handle savings deposit
-      console.log('Processing savings deposit callback, isSuccess:', isSuccess);
+    if (!reference) {
+      console.error('Missing TransactionReference in callback');
+      return new Response(JSON.stringify({ status: 'received' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
+    if (reference.startsWith('savings_')) {
       if (isSuccess) {
-        // Update savings deposit as verified
         const { data: deposit, error: updateError } = await supabase
           .from('savings_deposits')
           .update({
             verified: true,
-            mpesa_message: `M-Pesa Receipt: ${mpesa_code || 'N/A'}. Paid on ${payment_date || 'N/A'}`,
+            mpesa_message: `M-Pesa Receipt: ${TransactionReceipt || 'N/A'}. Paid on ${TransactionDate || 'N/A'}`,
           })
           .eq('transaction_code', reference)
           .select('user_id, amount')
@@ -60,9 +56,6 @@ serve(async (req) => {
         if (updateError) {
           console.error('Error updating deposit:', updateError);
         } else if (deposit) {
-          console.log('Deposit verified:', deposit);
-
-          // Update user savings balance
           const { data: existingSavings } = await supabase
             .from('user_savings')
             .select('balance')
@@ -80,66 +73,44 @@ serve(async (req) => {
           } else {
             await supabase
               .from('user_savings')
-              .insert({
-                user_id: deposit.user_id,
-                balance: deposit.amount,
-              });
+              .insert({ user_id: deposit.user_id, balance: deposit.amount });
           }
-
-          console.log('User savings balance updated');
         }
       } else {
-        // Mark deposit as failed
         await supabase
           .from('savings_deposits')
           .update({
             verified: false,
-            mpesa_message: `Payment failed: ${result_desc || 'Unknown error'}`,
+            mpesa_message: `Payment failed: ${ResponseDescription || 'Unknown error'}`,
           })
           .eq('transaction_code', reference);
-
-        console.log('Deposit marked as failed');
       }
-    } else if (reference?.startsWith('loan_')) {
-      // Handle loan disbursement payment
-      console.log('Processing loan payment callback');
-
+    } else if (reference.startsWith('loan_')) {
       if (isSuccess) {
         await supabase
           .from('loan_disbursements')
           .update({
             payment_verified: true,
-            transaction_code: mpesa_code || reference,
+            transaction_code: TransactionReceipt || TransactionID || reference,
           })
           .eq('transaction_code', reference);
-
-        console.log('Loan payment verified');
       } else {
         await supabase
           .from('loan_disbursements')
-          .update({
-            payment_verified: false,
-          })
+          .update({ payment_verified: false })
           .eq('transaction_code', reference);
-
-        console.log('Loan payment marked as failed');
       }
     }
 
     return new Response(
-      JSON.stringify({ success: true, message: 'Callback processed' }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
+      JSON.stringify({ status: isSuccess ? 'success' : 'received' }),
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error processing Lipwa callback:', error);
+    console.error('Error processing Paywave callback:', error);
     return new Response(
-      JSON.stringify({ success: false, error: 'Callback processing failed' }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
+      JSON.stringify({ status: 'error' }),
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
