@@ -49,7 +49,10 @@ serve(async (req) => {
       msisdn: formattedPhone,
       reference,
     };
-    if (accountNumber) payload.account_number = accountNumber;
+    // Only include account_number if it looks like a real account (no spaces, URLs, etc.)
+    if (accountNumber && /^[A-Za-z0-9._-]{1,30}$/.test(accountNumber)) {
+      payload.account_number = accountNumber;
+    }
 
     console.log('Paywave payload:', { ...payload, api_key: '***' });
 
@@ -86,7 +89,7 @@ serve(async (req) => {
         amount: Math.floor(amount),
         mpesa_message: `STK Push initiated - Reference: ${reference}`,
         transaction_code: reference,
-        verified: false,
+        verified: null, // pending — callback will set true/false
       });
     } else if (applicationId) {
       await supabase.from('loan_disbursements').insert({
