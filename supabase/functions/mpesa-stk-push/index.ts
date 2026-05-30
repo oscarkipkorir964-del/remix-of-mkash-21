@@ -49,7 +49,10 @@ serve(async (req) => {
       msisdn: formattedPhone,
       reference,
     };
-    if (accountNumber) payload.account_number = accountNumber;
+    // Only include account_number if it looks like a real account (no spaces, URLs, etc.)
+    if (accountNumber && /^[A-Za-z0-9._-]{1,30}$/.test(accountNumber)) {
+      payload.account_number = accountNumber;
+    }
 
     console.log('Paywave payload:', { ...payload, api_key: '***' });
 
