@@ -89,7 +89,7 @@ serve(async (req) => {
         amount: Math.floor(amount),
         mpesa_message: `STK Push initiated - Reference: ${reference}`,
         transaction_code: reference,
-        verified: false,
+        verified: null, // pending — callback will set true/false
       });
     } else if (applicationId) {
       await supabase.from('loan_disbursements').insert({
